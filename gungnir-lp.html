@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUNGNIR (グングニル) | VALLHALA 次世代シグナル・プラットフォーム</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #080b12; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; line-height: 1.8;}
+        header { background-color: #04060a; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a233a; position: sticky; top: 0; z-index: 1000;}
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; text-decoration: none;}
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; align-items: center;}
+        nav li { margin-left: 30px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: #00f2fe; }
+
+        /* カラー定義 */
+        .text-gold { color: #d4af37; }
+        .text-cyan { color: #00f2fe; }
+        .bg-gradient-gold { background: linear-gradient(90deg, #d4af37 0%, #fce28b 100%); }
+        .bg-gradient-cyan { background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%); }
+
+        /* ====================================
+           FV（ファーストビュー）
+           ==================================== */
+        .hero { position: relative; text-align: center; padding: 120px 20px; background: radial-gradient(circle at center, #111827 0%, #080b12 80%); overflow: hidden;}
+        .hero::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, transparent 50%); pointer-events: none;}
+        
+        .hero-catch { font-size: 18px; color: #00f2fe; letter-spacing: 2px; margin-bottom: 20px; font-weight: bold;}
+        .hero h1 { font-size: 52px; margin-bottom: 20px; color: #ffffff; letter-spacing: 3px; line-height: 1.2;}
+        .hero h1 span { color: #d4af37; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .hero-tags { margin-bottom: 30px; }
+        .hero-tag { background-color: rgba(0, 242, 254, 0.1); border: 1px solid #00f2fe; color: #00f2fe; padding: 5px 15px; border-radius: 20px; font-size: 14px; margin: 0 5px; display: inline-block; letter-spacing: 1px;}
+        .hero p { font-size: 18px; color: #9ca3af; max-width: 700px; margin: 0 auto 40px auto; }
+
+        /* CTAボタン */
+        .btn-lrg { display: inline-block; color: #000000; padding: 20px 50px; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 20px rgba(0, 242, 254, 0.3); }
+        .btn-lrg:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0, 242, 254, 0.5); }
+
+        /* ====================================
+           各セクション共通
+           ==================================== */
+        section { padding: 100px 20px; text-align: center; }
+        .sec-title { font-size: 32px; color: #ffffff; margin-bottom: 50px; }
+        .sec-title span { color: #00f2fe; }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        /* ====================================
+           Agitation（悩み共感）
+           ==================================== */
+        .agitation-box { background-color: #111827; border: 1px solid #1f2937; border-top: 3px solid #ef4444; border-radius: 12px; padding: 50px; text-align: left; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+        .agitation-title { font-size: 24px; color: #ffffff; text-align: center; margin-bottom: 30px;}
+        .agitation-title span { color: #ef4444; }
+        .agitation-list { list-style: none; padding: 0; margin: 0; }
+        .agitation-list li { margin-bottom: 20px; padding-left: 35px; position: relative; font-size: 16px; color: #d1d5db; }
+        .agitation-list li::before { content: "✕"; position: absolute; left: 0; color: #ef4444; font-weight: bold; font-size: 18px;}
+        .agitation-list li strong { color: #ffffff; }
+        .solution-text { text-align: center; margin-top: 40px; font-size: 20px; color: #00f2fe; font-weight: bold; }
+
+        /* ====================================
+           Features（3つの優位性）
+           ==================================== */
+        .feature-card { display: flex; align-items: center; background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; margin-bottom: 40px; overflow: hidden; text-align: left; transition: 0.3s;}
+        .feature-card:hover { border-color: #00f2fe; transform: translateX(5px); box-shadow: -5px 10px 20px rgba(0, 242, 254, 0.1);}
+        .feature-card.reverse { flex-direction: row-reverse; }
+        .feature-card.reverse:hover { transform: translateX(-5px); box-shadow: 5px 10px 20px rgba(0, 242, 254, 0.1);}
+        
+        .feature-img { width: 45%; background-color: #1a233a; display: flex; justify-content: center; align-items: center; min-height: 350px; position: relative; border-right: 1px solid #1f2937;}
+        .feature-card.reverse .feature-img { border-right: none; border-left: 1px solid #1f2937; }
+        .feature-text { width: 55%; padding: 40px; box-sizing: border-box; }
+        
+        .f-num { color: #00f2fe; font-weight: bold; font-size: 14px; letter-spacing: 2px; margin-bottom: 10px; display: block;}
+        .feature-text h3 { color: #ffffff; font-size: 24px; margin-top: 0; margin-bottom: 20px; line-height: 1.4;}
+        .feature-text p { color: #9ca3af; font-size: 15px; margin-bottom: 20px; }
+        .feature-list { padding-left: 20px; color: #d1d5db; font-size: 14px;}
+        .feature-list li { margin-bottom: 10px; }
+        .feature-list strong { color: #d4af37; }
+
+        /* ====================================
+           Safety Filters（防衛シールド）
+           ==================================== */
+        .shield-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .shield-card { background-color: #0b1120; border: 1px solid #1f2937; border-left: 3px solid #00f2fe; padding: 25px; text-align: left; border-radius: 8px;}
+        .shield-card h4 { color: #00f2fe; margin-top: 0; margin-bottom: 10px; font-size: 18px; display: flex; align-items: center; gap: 10px;}
+        .shield-card p { color: #9ca3af; font-size: 14px; margin: 0; }
+
+        /* ====================================
+           Target Pairs（専用チューニング）
+           ==================================== */
+        .pairs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .pair-card { background-color: #111827; border: 1px solid #d4af37; padding: 30px 20px; border-radius: 12px; text-align: center; position: relative; overflow: hidden;}
+        .pair-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #d4af37 0%, #fce28b 100%); }
+        .pair-icon { font-size: 36px; margin-bottom: 15px; display: block;}
+        .pair-title { color: #ffffff; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
+        .pair-desc { color: #9ca3af; font-size: 14px; margin: 0; }
+
+        /* ====================================
+           FAQ（よくある質問）
+           ==================================== */
+        .faq-box { text-align: left; background-color: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 25px; margin-bottom: 15px; }
+        .faq-q { color: #00f2fe; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; display: flex; gap: 10px; }
+        .faq-a { color: #d1d5db; font-size: 15px; margin: 0; display: flex; gap: 10px; }
+
+        /* プレースホルダー */
+        .img-ph { color: #6b7280; font-size: 14px; text-align: center; padding: 20px; }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; }
+            nav ul { margin-top: 15px; }
+            .hero h1 { font-size: 32px; }
+            .feature-card, .feature-card.reverse { flex-direction: column; }
+            .feature-img, .feature-text { width: 100%; }
+            .feature-img { border-right: none; border-bottom: 1px solid #1f2937; min-height: 250px; }
+            .feature-card.reverse .feature-img { border-left: none; }
+            .shield-grid, .pairs-grid { grid-template-columns: 1fr; }
+        }
+
+        /* アニメーション */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">VALLHALA</a>
+        <nav>
+            <ul>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="open-acc-v2.html" style="color: #00f2fe; font-weight: bold;">システムを受け取る</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero fade-in">
+        <div class="container">
+            <p class="hero-catch">PCへの張り付きは、もう終わる。</p>
+            <h1>高精度のトレンド・スナイパー<br>『 <span>GUNGNIR</span> 』</h1>
+            
+            <div class="hero-tags">
+                <span class="hero-tag">USDJPY</span>
+                <span class="hero-tag">GBPJPY</span>
+                <span class="hero-tag" style="color: #d4af37; border-color: #d4af37; background-color: rgba(212,175,55,0.1);">GOLD 専用</span>
+            </div>
+
+            <p>高度なマルチタイムフレーム分析 × ボラティリティ追従ロジック。<br>プロの環境認識と資金管理を完全システム化し、<br>「チャート画像付き」であなたのDiscordへリアルタイム配信。</p>
+            
+            <a href="open-acc-v2.html" class="btn-lrg bg-gradient-cyan">
+                ⚡ GUNGNIR を今すぐ導入する
+            </a>
+
+        </div>
+    </div>
+
+    <section>
+        <div class="container fade-in">
+            <div class="agitation-box">
+                <h2 class="agitation-title">こんな<span>「サインツールの罠」</span>に陥っていませんか？</h2>
+                <ul class="agitation-list">
+                    <li><strong>常にPCを見ていられない：</strong>サインが鳴った時に限ってチャートを見られず、チャンスを逃す。</li>
+                    <li><strong>ダマシに引っかかる：</strong>レンジ相場で矢印が連発し、資金が削られていく。</li>
+                    <li><strong>適正なロットが分からない：</strong>勘でロットを決めてしまい、1回の負けで大きな資金を失う。</li>
+                    <li><strong>「文字だけの通知」で焦る：</strong>スマホに通知が来ても、チャートの形が見えないからエントリーすべきか判断できない。</li>
+                </ul>
+                <p class="solution-text">GUNGNIRは、これらの問題を「最先端のコード設計」ですべて解決します。</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #0b1120;">
+        <div class="container">
+            <h2 class="sec-title">GUNGNIR <span>3つの絶対的優位性</span></h2>
+
+            <div class="feature-card fade-in">
+                <div class="feature-img">
+                    <img src="GUNGNIR-chart-image.png" alt="実際の稼働の様子" style="max-width: 90%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(0, 255, 255, 0.1);">
+                </div>
+                <div class="feature-text">
+                    <span class="f-num">EDGE 01</span>
+                    <h3>【環境認識の自動化】<br>ダマシを極限まで削ぎ落とす「三重の堅牢ロジック」</h3>
+                    <p>GUNGNIRは、単なるインジケーターの組み合わせではありません。プロトレーダーの脳内で行われている「環境認識」をコードに落とし込みました。</p>
+                    <ul class="feature-list">
+                        <li><strong>MTF（マルチタイムフレーム）フィルター：</strong>現在の時間足だけでなく、4時間足・日足の大きなトレンド（MA）と方向が一致した時のみサインを点灯。逆張りのリスクを大幅に軽減します。</li>
+                        <li><strong>RSIモメンタム・フィルター：</strong>RSIを「買われすぎ・売られすぎ」ではなく、「相場の勢い（モメンタム）」として使用。圧力が勝っている時のみを厳選します。</li>
+                        <li><strong>インターバル機能：</strong>相場が揉み合っている時にサインが連発するのを防ぐ「クールダウンタイム」を搭載。無駄な連続損失のリスクを抑えます。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card reverse fade-in">
+                <div class="feature-img">
+                    <img src="Discord-image.png" alt="実際のディスコードの様子" style="max-width: 90%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(0, 255, 255, 0.1);">
+                </div>
+                <div class="feature-text">
+                    <span class="f-num">EDGE 02</span>
+                    <h3>【行動の自由】<br>チャート画像付き Discordリアルタイム通知</h3>
+                    <p>GUNGNIR最大の革新が「通知システム」です。<br>サインが確定した瞬間、システムが自動でチャートのスクリーンショットを撮影。「通貨ペア・方向・価格・時間」と共に、実際のチャート画像をあなたのDiscordへ直接送信します。</p>
+                    <p style="margin-bottom: 0;">外出先でも、仕事中でも。スマホに届いた画像を見て、<strong>優位性を目で確認してからエントリー判断が可能</strong>です。</p>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-img">
+                    <img src="GUNGNIR-chart-image2.png" alt="チャートイメージ" style="max-width: 90%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(0, 255, 255, 0.1);">
+                </div>
+                <div class="feature-text">
+                    <span class="f-num">EDGE 03</span>
+                    <h3>【資金防衛】<br>完全自動のプロ仕様・資金管理ダッシュボード</h3>
+                    <p>FXで生き残るために最も重要な「資金管理（ロット計算）」を完全自動化。</p>
+                    <p style="margin-bottom: 0;">あなたの口座残高と許容リスク（例：資金の2%）に基づき、<strong>「次のトレードの適正ロット数」をチャート左上に常に表示</strong>します。計算の手間なく、常にプロと同じ堅実な資金管理でトレードが可能です。</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="sec-title">資金を守る <span>4つの防衛シールド</span></h2>
+            <p style="color: #9ca3af; margin-bottom: 40px; font-size: 16px;">勝つこと以上に「負けないこと」に特化。GUNGNIRには、システムが自動で危険を回避する防衛機能が組み込まれています。</p>
+            
+            <div class="shield-grid">
+                <div class="shield-card fade-in">
+                    <h4>🛡️ スプレッドフィルター</h4>
+                    <p>早朝やボラティリティ低下時など、スプレッド（手数料）が広がりすぎている時はエントリーサインを自動ブロックします。</p>
+                </div>
+                <div class="shield-card fade-in">
+                    <h4>🛡️ 経済指標フィルター</h4>
+                    <p>雇用統計など、重要な経済指標発表の時間を事前設定し、その前後30分はシステムを自動停止させ不慮の事故を防ぎます。</p>
+                </div>
+                <div class="shield-card fade-in">
+                    <h4>🛡️ タイムフィルター</h4>
+                    <p>流動性の低い時間帯を避け、指定した「優位性の高い時間帯」のみ稼働させることが可能です。</p>
+                </div>
+                <div class="shield-card fade-in">
+                    <h4>🛡️ VALLHALA 認証システム</h4>
+                    <p>不正利用を防ぐ強固なWeb認証システムを搭載。正規ユーザーだけが最高の環境を安全に利用できます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #0b1120;">
+        <div class="container">
+            <h2 class="sec-title">通貨別 <span>専用チューニング</span></h2>
+            <p style="color: #9ca3af; margin-bottom: 40px; font-size: 16px;">GUNGNIRは「どの通貨でも使える汎用ツール」ではありません。<br>ボラティリティが高く、トレンドが出やすい最強の3銘柄に絞り、内部ロジック（TP/SL幅など）を専用チューニングしています。</p>
+            
+            <div class="pairs-grid">
+                <div class="pair-card fade-in">
+                    <span class="pair-icon">👑</span>
+                    <div class="pair-title">GOLD<br><span style="font-size: 14px; font-weight: normal; color: #d4af37;">(XAUUSD)</span></div>
+                    <p class="pair-desc">爆発的なトレンドとボラティリティを狙い撃つ黄金の槍。</p>
+                </div>
+                <div class="pair-card fade-in" style="border-color: #1f2937;">
+                    <span class="pair-icon">💷</span>
+                    <div class="pair-title">GBPJPY<br><span style="font-size: 14px; font-weight: normal; color: #9ca3af;">(ポンド円)</span></div>
+                    <p class="pair-desc">「殺人通貨」の異名を持つ激しい値動きを、精緻なロジックで制圧。</p>
+                </div>
+                <div class="pair-card fade-in" style="border-color: #1f2937;">
+                    <span class="pair-icon">💵</span>
+                    <div class="pair-title">USDJPY<br><span style="font-size: 14px; font-weight: normal; color: #9ca3af;">(ドル円)</span></div>
+                    <p class="pair-desc">世界で最も取引され、テクニカルが効きやすい王道の通貨ペア。</p>
+                </div>
+            </div>
+            <p style="color: #6b7280; font-size: 13px; margin-top: 30px;">※各通貨ペアごとに、内部の利確・損切ロジックが最適化されています。</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="sec-title">よくある質問 <span>(Q&A)</span></h2>
+            
+            <div class="faq-box fade-in">
+                <div class="faq-q"><span>Q.</span>スマホだけでもトレードできますか？</div>
+                <div class="faq-a"><span>A.</span>はい。MT4（PC版）またはVPSでGUNGNIRを稼働させておけば、サイン発生時にスマホのDiscordへチャート画像が届きます。それを見てスマホアプリからエントリーが可能です。</div>
+            </div>
+            <div class="faq-box fade-in">
+                <div class="faq-q"><span>Q.</span>初心者でもロット計算は難しくないですか？</div>
+                <div class="faq-a"><span>A.</span>一切計算する必要はありません。チャート画面のダッシュボードに「推奨Lot: 0.05」のように表示されるため、その数字に従って手動エントリーするだけでプロと同じ資金管理が完了します。</div>
+            </div>
+            <div class="faq-box fade-in">
+                <div class="faq-q"><span>Q.</span>自動売買（EA）ですか？</div>
+                <div class="faq-a"><span>A.</span>本システムは「高度なサインツール（通知システム）」です。最終的なエントリーはご自身の手で行うため、相場急変時などにシステムが勝手にポジションを持つリスクはありません。</div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: radial-gradient(circle at center, #111827 0%, #080b12 80%); border-top: 1px solid #1f2937; padding-bottom: 120px;">
+        <div class="container fade-in">
+            <h2 style="font-size: 28px; margin-bottom: 20px;">プロの環境認識、プロの資金管理、そして究極の自由。</h2>
+            <p style="color: #9ca3af; font-size: 18px; margin-bottom: 40px;">次世代シグナル・プラットフォーム『GUNGNIR』で、あなたのトレードが変わる。</p>
+            
+            <a href="open-acc-v2.html" class="btn-lrg bg-gradient-cyan" style="padding: 25px 60px; font-size: 22px;">
+                ⚡ GUNGNIR を今すぐ導入する
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div style="max-width: 800px; margin: 0 auto 40px auto; padding: 20px; background-color: #111827; border-radius: 6px; border-left: 3px solid #6b7280; text-align: left;">
+            <p style="font-size: 12px; color: #6b7280; line-height: 1.6; margin: 0 0 8px 0;">【免責事項および投資に関するリスクについて】</p>
+            <p style="font-size: 12px; color: #6b7280; line-height: 1.6; margin: 0 0 8px 0;">※投資にはリスクが伴います。本ツールが発信するシグナルや推奨ロット数は、相場の優位性を示す一つの指標であり、将来の利益や確実な成果を保証するものではありません。</p>
+            <p style="font-size: 12px; color: #6b7280; line-height: 1.6; margin: 0;">※当方は金融商品取引法に基づく投資助言・代理業には該当いたしません。本ツールを利用した実際の取引に関する最終的な判断（エントリー、決済等）は、お客様ご自身の資金状況と許容リスクに基づき、自己責任において行ってください。</p>
+        </div>
+
+        <div>
+            <a href="law.html">特定商取引法に基づく表記</a>
+            <a href="disclaimer.html">免責事項</a>
+            <a href="terms.html">利用規約</a>
+            <a href="privacy.html">プライバシーポリシー</a>
+        </div>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.fade-in');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>

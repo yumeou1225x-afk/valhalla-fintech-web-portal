@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDAS 完全解説＆導入マニュアル | VALLHALA</title>
+    <style>
+        /* 基本設定 */
+        body { background-color: #0b1120; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
+        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; position: sticky; top: 0; z-index: 1000;}
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        /* タイトルエリア */
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .product-badge { background-color: rgba(212, 175, 55, 0.1); color: #d4af37; border: 1px solid #d4af37; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: inline-block; letter-spacing: 1px; }
+        .page-header h1 { font-size: 34px; margin-bottom: 20px; letter-spacing: 2px; line-height: 1.4;}
+        .page-header p { color: #9ca3af; font-size: 16px; margin: 0 auto; max-width: 700px; text-align: left; }
+
+        /* 目次 (TOC) */
+        .toc { background-color: #111827; border: 1px solid #1f2937; border-left: 4px solid #d4af37; padding: 25px; border-radius: 8px; margin-bottom: 50px; }
+        .toc h3 { color: #ffffff; margin-top: 0; margin-bottom: 15px; font-size: 18px; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 10px; }
+        .toc a { color: #9ca3af; text-decoration: none; transition: 0.2s; display: block; padding: 5px 0;}
+        .toc a:hover { color: #d4af37; padding-left: 5px;}
+
+        /* 各章デザイン */
+        .chapter { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .chapter-title { color: #d4af37; font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #1f2937; display: flex; align-items: center; gap: 15px;}
+        .chapter-title span { background-color: #d4af37; color: #000; padding: 2px 10px; border-radius: 4px; font-size: 16px; font-weight: bold;}
+
+        /* 見出し・テキスト */
+        h3 { color: #ffffff; font-size: 20px; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #d4af37; padding-left: 15px; }
+        h4 { color: #e5e7eb; font-size: 18px; margin-top: 30px; margin-bottom: 15px; }
+        p { color: #d1d5db; font-size: 15px; margin-bottom: 20px; }
+        ul { padding-left: 20px; margin-bottom: 25px; color: #d1d5db; }
+        li { margin-bottom: 10px; }
+        .highlight { color: #ffffff; font-weight: bold; background-color: rgba(212, 175, 55, 0.1); padding: 2px 6px; border-radius: 3px;}
+
+        /* テーブル（パラメーター） */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #0b1120; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 15px; border: 1px solid #1f2937; text-align: left; font-size: 14px; }
+        th { background-color: #1a233a; color: #d4af37; font-weight: bold; width: 35%; }
+        td { color: #d1d5db; }
+
+        /* ステップボックス */
+        .step-box { background-color: #0b1120; border-left: 4px solid #3b82f6; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px; border-top: 1px solid #1f2937; border-right: 1px solid #1f2937; border-bottom: 1px solid #1f2937;}
+        .step-title { color: #3b82f6; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; }
+        .step-box p:last-child { margin-bottom: 0; }
+
+        /* ボックス類 */
+        .alert-box { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 25px; margin: 30px 0; }
+        .alert-title { color: #ef4444; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; }
+        .alert-box p { color: #fca5a5; margin: 0; }
+        
+        .recommend-box { background-color: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+        .recommend-title { color: #10b981; margin-top: 0; margin-bottom: 10px; font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+
+        @media (max-width: 768px) {
+            .chapter { padding: 25px 15px; }
+            .page-header h1 { font-size: 26px; }
+            th, td { padding: 10px; font-size: 13px; display: block; width: 100%; box-sizing: border-box; }
+            th { border-bottom: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALLHALA</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <span class="product-badge">VALLHALA PREMIER SYSTEM</span>
+            <h1>👑 MIDAS<br>完全解説 ＆ 導入マニュアル</h1>
+            <p>本マニュアルは、最新のGUIと通知機能を搭載した「MIDAS EA」の公式運用ガイドです。EAの根幹となるロジックから、全パラメーターの詳細、相場のリスクを管理するための運用ルールまでを網羅しています。</p>
+        </div>
+
+        <div class="toc">
+            <h3>📑 目次</h3>
+            <ul>
+                <li><a href="#ch1">▶ 第1章：ロジックと搭載機能（特徴と強み）</a></li>
+                <li><a href="#ch2">▶ 第2章：導入・稼働マニュアル（チャートへの適用）</a></li>
+                <li><a href="#ch3">▶ 第3章：パラメーター完全解説</a></li>
+                <li><a href="#ch4">▶ 第4章：推奨運用ルールと注意点</a></li>
+            </ul>
+        </div>
+
+        <div id="ch1" class="chapter">
+            <h2 class="chapter-title"><span>第1章</span> ロジックと搭載機能（特徴と強み）</h2>
+            
+            <h3>📊 1. コアロジック：金銀の「統計的相関（ペアトレード）」</h3>
+            <p>MIDASは、歴史的に極めて強い相関関係（同じような値動きをする性質）を持つ<strong>「ゴールド（金）」と「シルバー（銀）」の価格比率</strong>に着目したクオンツ・ロジックを搭載しています。</p>
+            <p>通常は連動して動く金と銀ですが、突発的なニュース等で一時的にそのバランスが崩れることがあります。MIDASはこの乖離度合いを「Zスコア」として数値化し、「99%以上の確率であり得ない異常なズレ」を検知した瞬間に、<strong>「元の相関バランスに回帰しやすい」という統計的な性質（平均回帰）を狙って</strong>、ゴールドの逆張りエントリーを行います。</p>
+
+            <h3>🛡️ 2. 搭載されている主要機能</h3>
+            <ul>
+                <li><strong>トレンド・フィルター：</strong>大局のトレンド（200MA）を判定し、完全に逆行する無謀なエントリーを防ぎます。</li>
+                <li><strong>乖離解消による建値決済：</strong>相関バランスが正常に戻った際、自動的にストップロスを「建値」に移動し撤退を図ります。</li>
+                <li><strong>口座資金保護（プロテクター）：</strong>万が一、歴史的な大トレンドに巻き込まれた場合、自動で全決済して「口座の全損」を防ぎます。</li>
+                <li><strong>緊急GUIボタン：</strong>チャート上に「一括決済」「最大含み損カット」ボタンを配置し、ワンクリックでの危機回避を可能にしています。</li>
+            </ul>
+        </div>
+
+        <div id="ch2" class="chapter">
+            <h2 class="chapter-title"><span>第2章</span> 導入・稼働マニュアル</h2>
+            
+            <div style="background-color: #0f172a; border: 1px solid #d4af37; border-left: 5px solid #d4af37; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 15px; font-size: 18px;">⚠️ 必ずお読みください：共通の初期設定について</h4>
+                <p style="color: #cbd5e1; margin-bottom: 20px;">初めて稼働させる方は、システムをチャートに入れる前に<strong>「VPSの準備」「MT4の通信許可（DLL・Webリクエスト）」「通知設定」「ファイルの配置」</strong>を行う必要があります。<br>
+                まだ設定が完了していない方は、必ず以下の共通マニュアルを先に完了させてください。</p>
+                <a href="manual-setup.html" target="_blank" style="display: inline-block; background-color: #d4af37; color: #000; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 50px; transition: 0.3s;">
+                    ➡ 【全システム共通】導入・初期設定マニュアルを見る
+                </a>
+            </div>
+
+            <div class="step-box">
+                <h3 class="step-title">STEP 1：チャートへの適用と設定</h3>
+                <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">※共通の初期設定が完了していることを前提とした手順です。</p>
+                <ol style="padding-left: 20px; color: #cbd5e1; margin-bottom: 0;">
+                    <li style="margin-bottom: 10px;">MT4の気配値表示を開き、<strong>シルバー（XAGUSD等）が表示されている状態</strong>にします。（リストにあるだけでOKです）</li>
+                    <li style="margin-bottom: 10px;">XAUUSD（ゴールド）のチャートを開き、時間足を必ず <span class="highlight">「M5（5分足）」</span> に設定します。</li>
+                    <li style="margin-bottom: 10px;">ナビゲーターウィンドウから『MIDAS』をチャートにドラッグ＆ドロップします。</li>
+                    <li style="margin-bottom: 10px;">設定画面の「全般」タブで<strong>「自動売買を許可する」「DLLの使用を許可する」</strong>にチェックを入れます。</li>
+                    <li style="margin-bottom: 10px;"><strong>【重要】</strong>「パラメーターの入力」タブを開き、「読み込み」ボタンからPresetsフォルダに入れた「推奨セットファイル（.set）」を読み込んで「OK」を押します。</li>
+                </ol>
+            </div>
+
+            <div class="step-box" style="border-left-color: #10b981; margin-bottom: 0;">
+                <h3 class="step-title" style="color: #10b981;">STEP 2：稼働確認</h3>
+                <p style="margin-bottom: 0;">チャート左上にダッシュボード（情報パネル）が正常に表示され、スマホやDiscordに「通知テストは成功です！」というメッセージが届けば稼働準備完了です。</p>
+            </div>
+        </div>
+
+        <div id="ch3" class="chapter">
+            <h2 class="chapter-title"><span>第3章</span> パラメーター完全解説</h2>
+
+            <div class="recommend-box">
+                <h4 class="recommend-title">💡 セットファイル（.set）のご利用を強く推奨します</h4>
+                <p style="color: #d1fae5; font-size: 14px; margin-bottom: 0;">システム本体に同梱されている<strong>「推奨セットファイル」</strong>には最適なデフォルト設定がすでに保存されています。基本的にはセットファイルを読み込むだけで、安全に運用を開始していただけます。</p>
+            </div>
+
+            <h3>ロット・資金管理</h3>
+            <table>
+                <tr><th>UseMoneyManagement</th><td>trueで口座資金に合わせた複利運用、falseで固定ロット運用。</td></tr>
+                <tr><th>RiskPercent (3.5)</th><td>複利運用時のリスク割合（%）です。上げるほどロットが大きくなります。</td></tr>
+                <tr><th>FixedLotSize (0.05)</th><td>複利をfalseにした際の固定ロットです。</td></tr>
+            </table>
+
+            <h3>エントリー判断</h3>
+            <table>
+                <tr><th>EntryMode (0)</th><td>エントリーの厳しさです（0:厳格 〜 2:易しい）。</td></tr>
+                <tr><th>ZScoreThreshold (3.0)</th><td>エントリーの敷居となるZスコアです。3.0は超・堅実（低頻度）。</td></tr>
+                <tr><th>TrendMaPeriod (200)</th><td>トレンド判定に使う移動平均線（MA）の期間です。</td></tr>
+            </table>
+
+            <h3>決済・ナンピン設定</h3>
+            <table>
+                <tr><th>StartTrailPips (300.0)</th><td>含み益が何pipsに達したらトレーリング（利益確保）を開始するかの設定です。</td></tr>
+                <tr><th>IgnoreExitProfit (200.0)</th><td>乖離解消時に、すでにこのpips以上の利益が出ていれば建値決済をキャンセルし、利益を伸ばすモードに移行します。</td></tr>
+                <tr><th>NanpinDistance (4000.0)</th><td>次のナンピンを打つための最低限の距離（pips）です。</td></tr>
+                <tr><th>NanpinMultiplier (1.2)</th><td>ナンピン時のロットを前回の何倍にするかの設定です。</td></tr>
+            </table>
+
+            <h3 style="color: #ef4444; border-left-color: #ef4444;">★ 口座資金保護 (破綻防止) 【超重要】</h3>
+            <table>
+                <tr><th>UseEquityProtector</th><td>true 推奨。相場の急変時に口座の全損を防ぐ命綱です。</td></tr>
+                <tr><th>MaxDrawdownPercent (45.0)</th><td>有効証拠金が口座残高に対して何%のマイナス（ドローダウン）に達したら、強制損切りして逃げるかの設定です。</td></tr>
+            </table>
+
+            <h3>安全機能</h3>
+            <table>
+                <tr><th>UseNewsFilter (true)</th><td>指定した時間帯での「新規エントリー」を停止するかどうか。</td></tr>
+                <tr><th>NoTradeStartTime (21:00)</th><td>新規取引を【停止】する開始時間（MT4サーバー時間）です。</td></tr>
+                <tr><th>UseWeekendExit (false)</th><td>週末に全ポジションを強制決済して持ち越しを防ぐ機能です。</td></tr>
+            </table>
+        </div>
+
+        <div id="ch4" class="chapter">
+            <h2 class="chapter-title"><span>第4章</span> 推奨運用ルールと注意点</h2>
+
+            <div class="alert-box">
+                <h4 class="alert-title">⚠️ 1. プロテクター（資金保護）の推奨</h4>
+                <p>相関ロジックの唯一の弱点は、「金だけが異常に買われ続け、銀がついてこない歴史的なマクロトレンド」が発生した時です。この時、プロテクターを外してナンピンだけで耐えようとすると、数年に一度の確率で口座が全損する可能性があります。<strong>「ドローダウン40%〜50%で損切りして逃げる」</strong>設定にしておけば、残った資金で再起を図ることができます。</p>
+            </div>
+
+            <h3>2. 「NoTrade（取引停止）」時間の正しい使い方</h3>
+            <p>パラメーターの <code>NoTradeStartTime</code> と <code>EndTime</code> は、「稼働させる時間」ではなく<strong>「EAを休ませる時間」</strong>を設定する項目です。日本時間の深夜〜早朝など、流動性が低くスプレッドが広がりやすい時間を意図的に回避したい場合は、この数値を調整してください。</p>
+
+            <h3>3. 年末年始・超特大イベント時の手動停止</h3>
+            <ul>
+                <li><strong>年末年始（12/24〜1/4頃）：</strong> 突発的なフラッシュクラッシュ（暴落）が起きやすいため、EAの自動売買ボタンをオフにすることを強く推奨します。</li>
+                <li><strong>歴史的イベント：</strong> 米大統領選挙など、明らかに相場がパニックになることが事前に予想できる場合は、チャート左上の<strong>「Close All」</strong>ボタンでポジションを決済し、相場が落ち着くまで稼働を停止してください。</li>
+            </ul>
+
+            <div class="alert-box" style="margin-top: 40px; background-color: #111827; border-color: #374151;">
+                <h4 class="alert-title" style="color: #9ca3af;">【免責事項および注意事項】</h4>
+                <p style="color: #6b7280; font-size: 13px;">当システムは過去のデータに基づき検証されたロジックを搭載しておりますが、FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。最終的なロット数や稼働・停止の判断は、自己責任において行ってください。お客様の環境不具合等に伴ういかなる損失についても、開発元および配布元は一切の責任を負いかねます。</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

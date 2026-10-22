@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【全システム共通】導入・初期設定マニュアル | VALLHALA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #0b1120; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
+        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; position: sticky; top: 0; z-index: 1000;}
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        
+        footer { background-color: #060913; padding: 40px 20px; text-align: center; border-top: 1px solid #1a233a; margin-top: 80px;}
+        footer p { color: #475467; font-size: 12px; margin: 0; }
+
+        /* ====================================
+           マニュアル本体のデザイン
+           ==================================== */
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        /* タイトルエリア */
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .product-badge { background-color: rgba(212, 175, 55, 0.1); color: #d4af37; border: 1px solid #d4af37; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: inline-block; letter-spacing: 1px; }
+        .page-header h1 { font-size: 32px; margin-bottom: 20px; letter-spacing: 2px; line-height: 1.4;}
+        .page-header p { color: #9ca3af; font-size: 16px; margin: 0 auto; max-width: 700px; text-align: left; }
+
+        /* 各章（チャプター）のデザイン */
+        .chapter { background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .chapter-title { color: #d4af37; font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #1f2937; display: flex; align-items: center; gap: 15px;}
+        .chapter-title span { background-color: #d4af37; color: #000; padding: 2px 10px; border-radius: 4px; font-size: 16px; font-weight: bold;}
+
+        /* 見出しとテキスト */
+        h3 { color: #ffffff; font-size: 20px; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #d4af37; padding-left: 15px; }
+        p { color: #d1d5db; font-size: 15px; margin-bottom: 20px; }
+        strong { color: #ffffff; font-weight: bold; background: linear-gradient(transparent 70%, rgba(212, 175, 55, 0.4) 0%); }
+
+        /* リストデザイン */
+        ul { padding-left: 20px; margin-bottom: 25px; color: #d1d5db; }
+        li { margin-bottom: 10px; }
+
+        /* 手順（ステップ）デザイン */
+        .step-box { background-color: #0b1120; border-left: 4px solid #3b82f6; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px; border-top: 1px solid #1f2937; border-right: 1px solid #1f2937; border-bottom: 1px solid #1f2937;}
+        .step-title { color: #3b82f6; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; }
+        .step-box p:last-child { margin-bottom: 0; }
+        
+        /* 警告・重要ボックス */
+        .alert-box { background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 25px; margin: 30px 0; }
+        .alert-title { color: #ef4444; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;}
+        .alert-box p { color: #fca5a5; margin: 0; }
+
+        /* 画像プレースホルダー */
+        .image-placeholder { background-color: #1a233a; border: 2px dashed #374151; border-radius: 8px; padding: 30px; text-align: center; color: #6b7280; margin: 20px 0; font-size: 14px; }
+        .image-placeholder img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .chapter { padding: 25px 15px; }
+            .page-header h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALLHALA</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <span class="product-badge">SETUP GUIDE</span>
+            <h1>【全システム共通】<br>導入・初期設定マニュアル</h1>
+            <p>本マニュアルは、VALLHALAが提供するすべてのシステム（EA・サインツール等）を稼働させるための「共通の土台作り」を解説しています。どのシステムをご利用の場合でも、まずはこのページの手順を完了させてください。</p>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>Phase 1</span> 稼働環境（VPS）の準備</h2>
+            <p>自動売買システムやシグナルツールは、PCを24時間稼働させ続ける必要があります。ご自宅のPCを使うと、停電やスリープ、Windowsアップデートによる強制再起動などでシステムが停止し、予期せぬ大きな損失を被るリスクがあります。</p>
+            <p>そのため、安全なトレード環境を構築するために、<strong>「VPS（仮想専用サーバー）」の契約を強く推奨</strong>いたします。</p>
+
+            <h3>【代表的なおすすめVPSサービス】</h3>
+            <ul>
+                <li style="margin-bottom: 15px;">
+                    <a href="https://my.hyonix.com/aff.php?aff=5471" rel="noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">Hyonix(ハイオニクス)</a>：海外のサービスですが安価で十分な容量が使用できます。☆いちおし
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=3TH5IK+87WGFM+4NIK+61C2Q" rel="nofollow noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">ABLENET（エイブルネット）</a>：FX自動売買の定番。通信が安定しています。
+                    <img border="0" width="1" height="1" src="https://www11.a8.net/0.gif?a8mat=3TH5IK+87WGFM+4NIK+61C2Q" alt="" style="display:none;">
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=4B1ILJ+B5A6IA+50+5MLDQA" rel="nofollow noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">ConoHa for Windows Server</a>：初期設定が簡単で初心者向けです。
+                    <img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=4B1ILJ+B5A6IA+50+5MLDQA" alt="" style="display:none;">
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <a href="https://px.a8.net/svt/ejp?a8mat=3TB5YV+B0IPO2+50+3N1I8Y" rel="nofollow noopener noreferrer" target="_blank" style="color: #d4af37; text-decoration: underline; font-weight: bold;">お名前.com デスクトップクラウド</a>：FX専用プランがあり安心です。
+                    <img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=3TB5YV+B0IPO2+50+3N1I8Y" alt="" style="display:none;">
+                </li>
+                
+            </ul>
+            <p style="font-size: 14px; color: #9ca3af;">※VPSを契約したら、提供元のマニュアルに従って「リモートデスクトップ接続」を行い、VPSのWindows画面を開いてください。以降の作業はすべてVPS上で行います。</p>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>Phase 2</span> MT4の必須設定（Web通信と自動売買）</h2>
+            <p>VPS内に指定証券会社の「MT4（メタトレーダー4）」をインストールし、口座にログインしてください。その後、VALLHALAのシステムを正常に稼働させるための必須設定を行います。</p>
+
+            <div class="step-box">
+                <h3 class="step-title">STEP 1：自動売買ボタンのON</h3>
+                <p>MT4画面上部にある<strong>「自動売買」</strong>というボタンをクリックし、赤色（停止）から<strong>緑色（稼働）</strong>に変更します。<br>
+                <span style="font-size: 13px; color: #9ca3af;">※EAだけでなく、サインツールを稼働させる場合でもこのボタンはONにする必要があります。</span></p>
+            </div>
+
+            <div class="step-box" style="border-left-color: #ef4444;">
+                <h3 class="step-title" style="color: #ef4444;">STEP 2：オプション設定（DLLとWebリクエスト）★超重要</h3>
+                <p>システムの「口座認証」および「Discord通知」を行うために、外部サーバーとの通信を許可します。この設定が抜けているとシステムは一切動きません。</p>
+                <p>
+                    1. MT4上部メニューの「ツール」＞「オプション」を開きます。<br>
+                    2. <strong>「エキスパートアドバイザ」</strong>のタブを開きます。<br>
+                    3. 以下の3箇所にチェック（✅）を入れます。<br>
+                    　☑️ 自動売買を許可する<br>
+                    　☑️ DLLの使用を許可する<br>
+                    　☑️ WebRequestを許可するURLリスト<br>
+                    4. 「WebRequestを許可するURLリスト」の下にある「+（新しいURLを追加）」をダブルクリックし、以下の2つのURLを追加します。
+                </p>
+                <ul style="margin-top: 10px; margin-bottom: 10px;">
+                    <li style="color: #60a5fa; font-family: monospace;">https://script.google.com <span style="color: #9ca3af;">（口座認証用）</span></li>
+                    <li style="color: #60a5fa; font-family: monospace;">https://discord.com <span style="color: #9ca3af;">（通知用）</span></li>
+                </ul>
+                <p>5. 最後に「OK」をクリックして設定を保存します。</p>
+                
+                <div class="image-placeholder" style="display: flex; justify-content: center; align-items: center; text-align: center; padding: 20px; background-color: #1a233a; border: 2px dashed #374151; border-radius: 8px;">
+                    <img src="image-placeholder.png" alt="この状態にしてください" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>Phase 3</span> 通知機能の準備（スマホ連携・Discord）</h2>
+            <p>VALLHALAのシステムは、エントリーや決済の状況をリアルタイムで通知する機能を搭載しています。稼働前に、通知の受け皿となる設定を行っておきましょう。（※利用したい通知方法の手順のみ行ってください）</p>
+
+            <div class="step-box">
+                <h3 class="step-title">📱 スマホ版MT4へプッシュ通知を送る場合</h3>
+                <p>
+                    1. スマホ（iOS/Android）に「MetaTrader 4」アプリをインストールし、口座のログインを完了させます。<br>
+                    2. スマホアプリ内の「設定」＞「チャットとメッセージ」を開き、画面下部に表示されている<strong>「MetaQuotes ID（英数字）」</strong>をメモします。<br>
+                    3. 次に、VPS（PC版）のMT4で「ツール」＞「オプション」＞<strong>「通知機能」</strong>タブを開きます。<br>
+                    4. <strong>「プッシュ通知機能を有効にする」「トレード処理を通知する」</strong>の2箇所にチェックを入れます。<br>
+                    5. メモした「MetaQuotes ID」を入力し、「テスト」ボタンを押してスマホに通知が来れば設定完了です。<br>
+                    <span style="font-size: 13px; color: #9ca3af;">※実際の稼働時は、EAの設定（パラメーター）で UsePushNotify を true にしてください。</span>
+                </p>
+            </div>
+
+            <div class="step-box">
+                <h3 class="step-title">💬 Discordサーバーへ通知を送る場合（画像付き対応）</h3>
+                <p>
+                    1. スマホまたはPCに「Discord」アプリをインストールし、アカウントを作成・ログインします。<br>
+                    2. ご自身専用のサーバーとチャンネルを作成します。<br>
+                    3. PC版のDiscordで、作成したチャンネルの「設定（歯車マーク）」を開き、<strong>「連携サービス」＞「ウェブフック」＞「新しいウェブフック」</strong>を作成します。<br>
+                    <span style="font-size: 13px; color: #9ca3af;">（※ウェブフックの作成はPC版の画面からのみ可能です）</span><br>
+                    4. <strong>「ウェブフックURLをコピー」</strong>をクリックして、URLをメモ帳などに控えておいてください。<br>
+                    <span style="font-size: 13px; color: #9ca3af;">※控えたURLは、システム稼働時にEAの設定（パラメーター）にある DiscordWebHook 等の欄に貼り付け、UseDiscord を true にして使用します。</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-title"><span>Phase 4</span> ファイルの基本的な配置ルール</h2>
+            <p>各システムごとの専用ページからダウンロードした「ZIPファイル」を解凍すると、中に複数のファイルが入っています。これらはMT4内の指定されたフォルダに正確に配置する必要があります。</p>
+
+            <div class="step-box">
+                <h3 class="step-title">ファイルの入れ方</h3>
+                <p>1. MT4上部メニューの「ファイル」＞<strong>「データフォルダを開く」</strong>をクリックします。<br>
+                2. 開いたウィンドウの中から<strong>「MQL4」</strong>フォルダをダブルクリックして開きます。<br>
+                3. ダウンロードしたファイルを、それぞれ以下のフォルダにコピー＆ペーストして入れます。</p>
+                
+                <div style="background-color: #1a233a; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0; color: #d4af37; font-weight: bold;">📁 .ex4ファイル（システム本体）の場合</p>
+                    <p style="margin: 5px 0 15px 0;">➔ MQL4 ＞ <strong>Experts</strong> フォルダの中に入れる</p>
+                    
+                    <p style="margin: 0; color: #d4af37; font-weight: bold;">📁 .setファイル（パラメーター設定ファイル）の場合</p>
+                    <p style="margin: 5px 0 0 0;">➔ MQL4 ＞ <strong>Presets</strong> フォルダの中に入れる</p>
+                </div>
+                
+                <p style="margin-top: 15px;">4. ファイルを入れたら、MT4の左側にある「ナビゲーター」ウィンドウ内の「エキスパートアドバイザ」の上で右クリックし、<strong>「更新」</strong>を押します。<br>
+                5. ナンビゲーター内にシステムの名前が表示されれば、準備完了です！</p>
+            </div>
+            
+            <p style="text-align: center; color: #d4af37; font-size: 18px; font-weight: bold; margin-top: 40px;">
+                以上で、VALLHALAシステムを稼働させるための「共通の土台作り」は完了です。<br>
+                続いて、各システムの専用マニュアルに従ってチャートへの適用を行ってください！
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

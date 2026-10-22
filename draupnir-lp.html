@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAUPNIR V システム導入 | VALHALLA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #0b1120; /* 指定のダークブルー */ color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        header { background-color: #060913; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1a233a; }
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        
+        footer { background-color: #060913; padding: 40px 20px; text-align: center; border-top: 1px solid #1a233a; margin-top: 80px;}
+        footer a { color: #667085; text-decoration: none; margin: 0 15px; font-size: 14px; transition: 0.3s; display: inline-block; margin-bottom: 10px;}
+        footer a:hover { color: #d4af37; }
+        footer p { color: #475467; font-size: 12px; margin-top: 20px; }
+
+        /* ====================================
+           LP専用デザイン（DRAUPNIR）
+           ==================================== */
+        /* ファーストビュー */
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px 80px 20px;
+            background: linear-gradient(180deg, #0b1120 0%, #111827 100%);
+            border-bottom: 2px solid #d4af37;
+            position: relative;
+        }
+        .hero-badge { display: inline-block; background-color: rgba(212, 175, 55, 0.1); color: #d4af37; border: 1px solid #d4af37; font-weight: bold; padding: 5px 20px; border-radius: 50px; margin-bottom: 20px; font-size: 14px; letter-spacing: 1px;}
+        .hero-section h1 { font-size: 36px; color: #ffffff; margin-bottom: 20px; line-height: 1.4; font-weight: 300;}
+        .hero-section h1 span { color: #d4af37; font-size: 48px; font-weight: bold; display: block; margin-top: 10px; letter-spacing: 2px;}
+        .hero-section p { font-size: 16px; color: #9ca3af; line-height: 1.8; max-width: 800px; margin: 0 auto 40px auto; }
+
+        /* コンテンツセクション共通 */
+        .content-section { padding: 80px 20px; max-width: 900px; margin: 0 auto; text-align: center;}
+        .section-title { font-size: 28px; color: #ffffff; margin-bottom: 50px; position: relative; display: inline-block; padding-bottom: 15px;}
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #d4af37; }
+        .section-title.red-accent::after { background-color: #ef4444; }
+
+        /* 問題提起セクション */
+        .pain-box { background-color: #111827; border: 1px solid #1f2937; border-left: 4px solid #ef4444; padding: 40px; border-radius: 8px; text-align: left; }
+        .pain-box h3 { color: #ef4444; font-size: 22px; margin-top: 0; margin-bottom: 20px; }
+        .pain-box p { color: #d1d5db; line-height: 1.8; font-size: 16px; margin: 0; }
+
+        /* 特徴・ロジック（リスト形式） */
+        .feature-list { text-align: left; margin-top: 40px;}
+        .feature-item { background-color: #111827; border: 1px solid #1f2937; padding: 30px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: flex-start;}
+        .feature-number { color: #d4af37; font-size: 32px; font-weight: bold; opacity: 0.5; margin-right: 20px; line-height: 1;}
+        .feature-text h3 { color: #ffffff; font-size: 20px; margin-top: 0; margin-bottom: 10px; }
+        .feature-text p { color: #9ca3af; font-size: 15px; line-height: 1.6; margin: 0; }
+
+        /* 実績画像セクション */
+        .evidence-grid { display: flex; flex-direction: column; gap: 40px; margin-top: 40px;}
+        .evidence-card { background-color: #111827; border: 1px solid #1f2937; padding: 20px; border-radius: 8px; }
+        .evidence-image-placeholder { width: 100%; height: auto; background-color: #1f2937; border: 1px dashed #374151; display: flex; justify-content: center; align-items: center; color: #6b7280; padding: 100px 0; border-radius: 4px; margin-bottom: 20px;}
+        .evidence-image-placeholder img { width: 100%; height: auto; border-radius: 4px; display: none; /* 画像設定時に外す */ }
+        .evidence-caption { color: #d1d5db; font-size: 15px; line-height: 1.6; text-align: left; border-left: 3px solid #d4af37; padding-left: 15px;}
+
+        /* プラン表 */
+        .plan-container { display: flex; gap: 20px; justify-content: center; margin-top: 40px; flex-wrap: wrap;}
+        .plan-card { background-color: #111827; border: 1px solid #1f2937; padding: 40px 30px; border-radius: 8px; width: calc(50% - 10px); box-sizing: border-box; text-align: center; position: relative;}
+        .plan-card.active { border-color: #d4af37; background: linear-gradient(180deg, #111827 0%, #1f2937 100%);}
+        .plan-card h3 { color: #ffffff; font-size: 22px; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #374151; padding-bottom: 15px;}
+        .plan-card .price { font-size: 28px; color: #d4af37; font-weight: bold; display: block; margin-bottom: 20px;}
+        .plan-features { list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; color: #d1d5db; font-size: 15px; line-height: 1.8;}
+        .plan-features li { margin-bottom: 10px; padding-left: 20px; position: relative;}
+        .plan-features li::before { content: '✓'; color: #10b981; position: absolute; left: 0; font-weight: bold;}
+        
+        /* 準備中プランの設定 */
+        .plan-card.disabled { opacity: 0.6; }
+        .badge-soon { position: absolute; top: -12px; right: 20px; background-color: #6b7280; color: #fff; font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
+
+        /* ダウンロード（CTA）エリア：ここが今回の最重要ポイント！ */
+        .download-section { background-color: #111827; padding: 80px 20px; text-align: center; border-top: 2px solid #d4af37; border-bottom: 2px solid #d4af37; margin-top: 50px; }
+        .download-box { max-width: 600px; margin: 0 auto; background-color: #0b1120; padding: 40px; border-radius: 8px; border: 1px solid #1f2937; }
+        .download-box h3 { color: #d4af37; font-size: 24px; margin-top: 0; margin-bottom: 20px;}
+        .download-box p { color: #9ca3af; font-size: 15px; line-height: 1.6; margin-bottom: 30px;}
+        
+        /* ダウンロードボタン */
+        .btn-download { display: inline-block; background-color: #d4af37; color: #000000; padding: 20px 40px; font-size: 20px; font-weight: bold; text-decoration: none; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); width: 100%; box-sizing: border-box;}
+        .btn-download:hover { background-color: #fce28b; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
+        .btn-disabled { display: inline-block; background-color: #374151; color: #9ca3af; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; width: 100%; box-sizing: border-box; cursor: not-allowed;}
+
+        /* 法務用の免責事項 */
+        .legal-footer-note { max-width: 800px; margin: 40px auto 0 auto; padding: 20px; background-color: #111827; border-radius: 6px; border-left: 3px solid #6b7280; text-align: left;}
+        .legal-footer-note p { font-size: 12px; color: #6b7280; line-height: 1.6; margin: 0 0 8px 0; }
+        .legal-footer-note p:last-child { margin-bottom: 0; }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .hero-section { padding: 80px 20px 60px 20px; }
+            .hero-section h1 { font-size: 24px; }
+            .hero-section h1 span { font-size: 32px; }
+            .plan-card { width: 100%; }
+            .feature-item { flex-direction: column; }
+            .feature-number { margin-bottom: 15px; }
+            .btn-download { font-size: 18px; padding: 15px 20px; }
+        }
+
+        /* アニメーション */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALHALLA</div>
+    </header>
+
+    <div class="hero-section fade-in">
+        <span class="hero-badge">VALHALLA MTF AI LOGIC</span>
+        <h1>激動の10年を生き抜いた、生存戦略の最適解。<br><span>DRAUPNIR V</span></h1>
+        <p>右肩上がりの”嘘くさいバックテスト”に騙されるのは、もう終わりにしませんか？<br>歴史的円安も、フラッシュクラッシュも乗り越えた「真のリカバリー力」と「爆発力」がここにあります。</p>
+        
+        <a href="https://lin.ee/lOi6rtH" class="btn-download">無料で使用開始する（公式LINE登録）</a>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title red-accent fade-in">あなたのEAは、相場が急変した瞬間に「破綻」していませんか？</h2>
+        <div class="pain-box fade-in">
+            <h3>「〇pips逆行したらナンピンする」その固定ロジックが命取りです。</h3>
+            <p>巷に溢れる単純な固定型のナンピンEAは、相場が穏やかな時は勝てますが、一度大きなトレンド（歴史的な円安など）が発生すると、無限にポジションを持ち続け、一瞬にして口座を吹き飛ばします。<br><br>
+            DRAUPNIR（ドラウプニル）は、その「EAの宿命」を打ち破るために開発されました。相場のボラティリティを瞬時に計算し、落ちるナイフを掴まない「真の防衛力」を備えた次世代のシステムです。</p>
+        </div>
+    </div>
+
+    <div class="content-section" style="background-color: #111827; max-width: 100%;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 class="section-title fade-in">「鉄壁の守り」と「最大の攻め」を両立する次世代システム</h2>
+            
+            <div class="feature-list">
+                <div class="feature-item fade-in">
+                    <span class="feature-number">01</span>
+                    <div class="feature-text">
+                        <h3>動的ボラティリティ追従（ATR）</h3>
+                        <p>固定のpips幅でエントリーするのではなく、その瞬間の相場のボラティリティ（変動幅）をミリ秒単位で計算し、リスクとエントリー幅を自動で最適化します。</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <span class="feature-number">02</span>
+                    <div class="feature-text">
+                        <h3>スコアリング・エントリーシステム</h3>
+                        <p>単一のインジケータに頼るのではなく、複数のテクニカル条件を配点化。合計スコアが基準値に達した優位性の高いポイントを厳選し、ピンポイントで狙います。</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <span class="feature-number">03</span>
+                    <div class="feature-text">
+                        <h3>落ちるナイフを掴まない「スマート・ナンピン」</h3>
+                        <p>無謀な逆張りは行いません。相場の勢いを見極め、明確な「反発サイン」を検知した時だけ計画的にポジションを追加し、リスクを抑えながらリカバリーを図ります。</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <span class="feature-number">04</span>
+                    <div class="feature-text">
+                        <h3>利益を倍増させる「ピラミッティング（順行追撃）」</h3>
+                        <p>防御だけでなく、強いトレンド相場に乗った際は「増し玉（ピラミッティング）」を発動。リスクを限定しながら利益だけを最大化させる攻撃力を備えています。</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <span class="feature-number">05</span>
+                    <div class="feature-text">
+                        <h3>投資家のメンタルを守る「フェイルセーフ強制防衛」</h3>
+                        <p>万が一のブラックスワン（想定外の暴落）に備え、あらかじめ設定した口座資金の%で強制的に全決済を実行。「一度の逆行で全資金を失う」というリスクを極限まで排除します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title fade-in">過剰最適化を一切排除した、真の10年間バックテスト</h2>
+        <p style="color: #9ca3af; line-height: 1.8; margin-bottom: 40px;" class="fade-in">都合の良い相場だけを切り取ったデータは提示しません。<br>2015年から2025年まで、あらゆる相場環境を「単一のパラメーター」で生き抜きました。</p>
+
+        <div class="evidence-grid">
+        <div class="evidence-card fade-in">
+            <img src="backtest1.png" alt="10年間バックテスト" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+            <p style="color: #d1d5db; font-size: 15px; line-height: 1.6; text-align: left; border-left: 3px solid #d4af37; padding-left: 15px;">10年間（2015-2025）の生存実績。停滞期を乗り越え、確実に最高益を更新する強靭なリカバリー力。</p>
+        </div>
+        
+        <div class="evidence-card fade-in">
+            <img src="backtest2.png" alt="2020-2025バックテスト" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+            <p style="color: #d1d5db; font-size: 15px; line-height: 1.6; text-align: left; border-left: 3px solid #d4af37; padding-left: 15px;">多くのEAが破綻した歴史的円安相場でも、ドローダウンを26%台に抑え込み安定して利益を創出。</p>
+        </div>
+
+        <div class="evidence-card fade-in">
+            <img src="backtest3.png" alt="2015-2020バックテスト" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px;">
+            <p style="color: #d1d5db; font-size: 15px; line-height: 1.6; text-align: left; border-left: 3px solid #d4af37; padding-left: 15px;">ロジックが完全に噛み合った黄金期は、プロフィットファクター2.80という圧倒的なパフォーマンスを発揮。</p>
+        </div>
+    </div>
+
+    <div class="content-section" style="background-color: #111827; max-width: 100%;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 class="section-title fade-in">あなたの運用スタイルに合わせてお選びください</h2>
+            
+            <div class="plan-container">
+                <div class="plan-card active fade-in">
+            <h3>タイアップ専用版（推奨）</h3> <span class="price">無料提供</span> <ul class="plan-features">
+                <li>初期費用 0円</li>
+                <li>指定タイアップ口座のご利用</li> <li>VALHALLA API認証（口座縛り）必須</li>
+                <li>DRAUPNIRの全機能が利用可能</li>
+            </ul>
+            <p style="color: #9ca3af; font-size: 13px; margin-top: 20px;">※指定の証券会社キャンペーンをご利用いただいた方限定で、システム一式を完全無料でご提供いたします。</p>
+        </div>
+
+                <div class="plan-card disabled fade-in">
+                    <span class="badge-soon">Coming Soon</span>
+                    <h3 style="color: #6b7280;">買い切り版（制限なし）</h3>
+                    <span class="price" style="color: #6b7280;">価格未定</span>
+                    <ul class="plan-features" style="color: #6b7280;">
+                        <li style="color: #6b7280;">初期費用が発生します</li>
+                        <li style="color: #6b7280;">稼働口座の制限・縛りなし</li>
+                        <li style="color: #6b7280;">API認証不要で自由に稼働可能</li>
+                        <li style="color: #6b7280;">DRAUPNIRの全機能が利用可能</li>
+                    </ul>
+                    <span class="btn-disabled" style="margin-top: 20px;">現在準備中</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="download-area" class="download-section fade-in">
+        <h2 style="color: #ffffff; font-size: 32px; margin-bottom: 20px;">システム一式のお受け取り</h2>
+        <p style="color: #9ca3af; font-size: 16px; margin-bottom: 40px;">DRAUPNIRの稼働をご希望の方は、以下のボタンより公式LINEを追加し、<br>案内に従って「無料配布」のお手続きを進めてください。</p>
+        
+        <div class="download-box">
+            <h3>📦 DRAUPNIR v2.70 フルパッケージ</h3>
+            <p style="margin-bottom: 30px;">※口座開設とAPI認証の完了後、専用のダウンロードリンクをお渡しいたします。</p>
+            
+            <a href="https://lin.ee/lOi6rtH" class="btn-download">
+                無料で使用開始する（公式LINE登録）
+            </a>
+            
+            <p style="color: #6b7280; font-size: 13px; margin-top: 20px;">【提供内容】EA本体 (.ex4) / 推奨セットファイル / 導入マニュアル<br>※稼働にはWindows搭載のPC、またはVPS環境が必要です。</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="legal-footer-note fade-in">
+            <p>【免責事項および投資に関するリスクについて】</p>
+            <p>※投資にはリスクが伴います。必ず余剰資金で運用を行ってください。本ページに掲載されているバックテスト結果等のエビデンスは過去のデータに基づくものであり、将来の利益や確実な成果を保証するものではありません。</p>
+            <p>※お客様のPC環境、VPSの不具合、または証券会社側のサーバーダウン等に起因するシステムの稼働停止や、それに伴ういかなる損失（機会損失を含む）についても、当方は一切の責任を負いかねます。</p>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="index.html">トップページへ戻る</a>
+            <a href="law.html">特定商取引法に基づく表記</a>
+            <a href="disclaimer.html">免責事項</a>
+            <a href="privacy.html">プライバシーポリシー</a>
+        </div>
+        <p>&copy; 2026 VALHALLA All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.fade-in');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最上位システム MIDAS| VALHALLA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター
+           ==================================== */
+        body { background-color: #121212; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        header { background-color: #000000; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; }
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav li { margin-left: 30px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: #d4af37; }
+        footer { background-color: #000000; padding: 40px 20px; text-align: center; border-top: 1px solid #333333; margin-top: 80px;}
+        footer a { color: #888888; text-decoration: none; margin: 0 15px; font-size: 14px; transition: 0.3s; display: inline-block; margin-bottom: 10px;}
+        footer a:hover { color: #d4af37; }
+        footer p { color: #555555; font-size: 12px; margin-top: 20px; }
+
+        /* ====================================
+           LP専用デザイン
+           ==================================== */
+        /* ファーストビュー */
+        .detail-hero { text-align: center; padding: 120px 20px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%); border-bottom: 2px solid #d4af37; }
+        .hero-badge { display: inline-block; background-color: #d4af37; color: #000; font-weight: bold; padding: 5px 15px; border-radius: 50px; margin-bottom: 20px; font-size: 14px; letter-spacing: 1px;}
+        .detail-hero h1 { font-size: 38px; color: #ffffff; margin-bottom: 20px; letter-spacing: 1px; line-height: 1.4; }
+        .detail-hero h1 span { color: #d4af37; font-size: 48px; display: block; margin-top: 10px;}
+        .detail-hero p { font-size: 18px; color: #cccccc; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+        /* ペイン（悩み）セクション */
+        .pain-section { background-color: #1a1a1a; padding: 60px 20px; text-align: center; border-bottom: 1px solid #333; }
+        .pain-section h2 { color: #ff4d4d; font-size: 24px; margin-bottom: 30px; }
+        .pain-list { max-width: 800px; margin: 0 auto; text-align: left; }
+        .pain-list p { background-color: #222; padding: 20px; border-radius: 8px; border-left: 4px solid #ff4d4d; margin-bottom: 15px; font-size: 16px; color: #ddd; }
+
+        /* コンテンツエリア共通 */
+        .content-section { padding: 80px 20px; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .content-section h2 { font-size: 32px; color: #d4af37; margin-bottom: 50px; border-bottom: 2px solid #333; display: inline-block; padding-bottom: 10px; }
+
+        /* ロジック・特徴（3つ並び） */
+        .features-grid { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+        .feature-box { background-color: #1e1e1e; padding: 40px 30px; border-radius: 8px; border-top: 3px solid #d4af37; width: calc(33.333% - 20px); box-sizing: border-box; text-align: left; }
+        .feature-box h3 { color: #ffffff; font-size: 20px; margin-top: 0; margin-bottom: 15px; }
+        .feature-box p { color: #cccccc; font-size: 15px; line-height: 1.6; margin: 0; }
+        .feature-number { color: #d4af37; font-size: 48px; font-weight: bold; opacity: 0.3; margin-bottom: 10px; display: block; line-height: 1; }
+
+        /* 実績（バックテスト）エリア */
+        .results-highlight { background-color: #0a0a0a; padding: 80px 20px; border-top: 1px solid #222; border-bottom: 1px solid #222;}
+        .stats-grid { display: flex; gap: 20px; max-width: 900px; margin: 0 auto 40px auto; flex-wrap: wrap; justify-content: center;}
+        .stat-box { background-color: #1a1a1a; padding: 25px; border-radius: 8px; border: 1px solid #333; text-align: center; width: calc(25% - 15px); box-sizing: border-box; }
+        .stat-num { color: #d4af37; font-size: 32px; font-weight: bold; display: block; margin-bottom: 5px; }
+        .stat-label { color: #aaa; font-size: 13px; }
+        
+        .backtest-image-container { max-width: 900px; margin: 0 auto; border: 1px solid #333; border-radius: 8px; padding: 10px; background-color: #fff; }
+        .backtest-image-container img { width: 100%; height: auto; display: block; }
+        .backtest-note { max-width: 900px; margin: 20px auto 0; text-align: left; color: #aaa; font-size: 14px; line-height: 1.6; }
+
+        /* プラン（導入方法）セクション */
+        .plan-section { padding: 80px 20px; text-align: center; }
+        .plan-grid { display: flex; gap: 30px; justify-content: center; max-width: 900px; margin: 0 auto; flex-wrap: wrap;}
+        .plan-box { background-color: #1a1a1a; padding: 40px 30px; border-radius: 8px; border: 1px solid #333; width: calc(50% - 15px); box-sizing: border-box; text-align: left; position: relative; overflow: hidden;}
+        .plan-box h3 { color: #d4af37; font-size: 22px; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;}
+        .plan-box p { color: #cccccc; font-size: 15px; line-height: 1.6; margin: 0; }
+        .plan-badge { position: absolute; top: 15px; right: -35px; background-color: #d4af37; color: #000; font-weight: bold; font-size: 12px; padding: 5px 40px; transform: rotate(45deg); letter-spacing: 1px;}
+
+        /* LINE誘導（CTA） */
+        .cta-section { background-color: #1e1e1e; padding: 80px 20px; text-align: center; border-top: 3px solid #d4af37; margin-top: 50px; }
+        .cta-section h2 { color: #ffffff; font-size: 32px; margin-bottom: 20px; }
+        .cta-section p { color: #dddddd; font-size: 18px; margin-bottom: 40px; line-height: 1.6; }
+        .btn-line { display: inline-block; background-color: #06c755; color: #ffffff; padding: 20px 60px; font-size: 24px; font-weight: bold; text-decoration: none; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 15px rgba(6, 199, 85, 0.3); }
+        .btn-line:hover { background-color: #05a044; transform: scale(1.05); box-shadow: 0 8px 20px rgba(6, 199, 85, 0.5); }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px 20px; }
+            nav ul { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            nav li { margin: 5px 10px; }
+            .detail-hero h1 { font-size: 24px; }
+            .detail-hero h1 span { font-size: 32px; }
+            .feature-box { width: 100%; }
+            .stat-box { width: calc(50% - 10px); }
+            .plan-box { width: 100%; }
+            .btn-line { font-size: 18px; padding: 15px 30px; width: 90%; box-sizing: border-box;}
+        }
+
+        /* アニメーション */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALHALLA</div>
+        <nav>
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="products.html" style="color: #d4af37;">Products</a></li>
+                <li><a href="index.html#results">Results</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="detail-hero fade-in">
+        <span class="hero-badge">VALHALLA 最上位フラッグシップ</span>
+        <h1>機関投資家の「統計的裁定取引」を完全システム化<br><span>MIDAS</span></h1>
+        <p>月利50%を謳う「爆益EA」で、資金を溶かすのはもうやめにしませんか？<br>激動の10年間で最大DD30%以下・勝率95%を記録した、堅牢なヘッジファンド型システムがついに解禁。</p>
+    </div>
+
+    <div class="pain-section fade-in">
+        <h2>自動売買（EA）で、こんな経験をしていませんか？</h2>
+        <div class="pain-list">
+            <p>☑ 「バックテストは綺麗だったのに、実際に稼働させたら一度の逆行で全資金が吹き飛んだ（コツコツドカン）」</p>
+            <p>☑ 「毎日ハラハラしながらチャートを見て、結局手動で損切りしてしまった」</p>
+            <p>☑ 「Fintokeiなどのプロップファーム試験に挑戦したが、ナンピンEAのドローダウンに耐えきれず失格になった」</p>
+        </div>
+        <p style="color: #aaa; margin-top: 30px; line-height: 1.8;">もし一つでも当てはまるなら、あなたのせいではありません。<br>それは、単一通貨の過去の値動きだけを追いかける「インジケーターの限界」であり、<br>資金を守る機能が欠如したツールを使っていたからです。</p>
+    </div>
+
+    <div class="content-section">
+        <h2 class="fade-in">SYSTEM FEATURES</h2>
+        <p style="color: #ccc; margin-bottom: 50px; line-height: 1.8;" class="fade-in">
+            本システムは、巷に溢れる単純なツールではありません。<br>古くからヘッジファンドが監視し続けている「金と銀の価格相関（金銀比価）」に着目し、<br>統計的な異常値（Z-Score）が発生した瞬間にのみエントリーを行う高度なアービトラージシステムです。
+        </p>
+        <div class="features-grid">
+            <div class="feature-box fade-in">
+                <span class="feature-number">01</span>
+                <h3>究極の安全装置<br>Equity Protector</h3>
+                <p>プロップファームの厳しい失格基準に対応するため、含み損が指定した%に達した瞬間、強制的に全決済を行う機能を搭載。「口座残高がゼロになる」という投資家最大の恐怖を排除します。</p>
+            </div>
+            <div class="feature-box fade-in delay-1">
+                <span class="feature-number">02</span>
+                <h3>逃げの美学<br>乖離解消ブレイクイーブン</h3>
+                <p>金と銀の「歪み」が正常値に戻ったと判断した瞬間に、決済ラインを建値に移動させます。「勝てない相場からは、リスクゼロでいち早く逃げる」という高度な危機回避ロジックです。</p>
+            </div>
+            <div class="feature-box fade-in delay-2">
+                <span class="feature-number">03</span>
+                <h3>完全放置を実現<br>時間・週末・ニュース回避</h3>
+                <p>深夜の流動性が低い時間帯や、週明けの予測不能な「窓開け」リスクを完全に排除。金曜日の夜には自動で全ポジションを決済し、ノーポジションで安心して週末を迎えられます。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="results-highlight">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <h2 class="fade-in" style="font-size: 32px; color: #d4af37; margin-bottom: 50px; border-bottom: 2px solid #333; display: inline-block; padding-bottom: 10px;">10-YEAR BACKTEST</h2>
+            
+            <div class="stats-grid fade-in">
+                <div class="stat-box"><span class="stat-num">4.51</span><span class="stat-label">プロフィットファクター</span></div>
+                <div class="stat-box"><span class="stat-num">95.2%</span><span class="stat-label">勝率 (売ポジションは100%)</span></div>
+                <div class="stat-box"><span class="stat-num">293回</span><span class="stat-label">10年間の厳選取引数</span></div>
+                <div class="stat-box"><span class="stat-num">30.2%</span><span class="stat-label">最大ドローダウン</span></div>
+            </div>
+
+            <div class="backtest-image-container fade-in delay-1">
+                <img src="backtest.png" alt="MIDAS_MR_Pro 10年間バックテスト結果">
+            </div>
+            <p class="backtest-note fade-in delay-2">
+                【テスト期間：2015.01.01 - 2025.01.01】チャイナショック、コロナショック、歴史的インフレを含む「システムトレードにとって最も過酷な10年間」のデータです。カーブフィッティングではない「本物の優位性」がここにあります。
+            </p>
+        </div>
+    </div>
+
+    <div class="plan-section content-section">
+        <h2 class="fade-in">PLANS</h2>
+        <p style="color: #ccc; margin-bottom: 40px; line-height: 1.8;" class="fade-in">
+            VALHALLAが開発する各システムは、お客様の運用スタイルに合わせて以下の2つの導入方法をご用意しております。
+        </p>
+        <div class="plan-grid">
+            <div class="plan-box fade-in">
+                <h3>① 買い切りプラン（販売）</h3>
+                <p>ご自身が現在お使いの証券会社（口座）で、制限なく自由にシステムを稼働させたい方向けのプランです。一度のご購入で、永続的にシステムをご利用いただけます。</p>
+            </div>
+            <div class="plan-box fade-in delay-1">
+                <div class="plan-badge">Popular</div>
+                <h3>② タイアッププラン（無料提供）</h3>
+                <p>当方が提携する指定証券会社の口座開設キャンペーン等をご利用いただくことで、システム代金【無料】で導入いただけるプランです。初期費用を抑えてシステムトレードを始めたい方にお勧めです。</p>
+            </div>
+        </div>
+        <p style="color: #aaa; margin-top: 30px; font-size: 14px;" class="fade-in delay-2">※各ツールの販売価格や、タイアップ指定証券会社の詳細につきましては、公式LINEにて個別にご案内しております。</p>
+    </div>
+
+    <div class="cta-section fade-in">
+        <h2>圧倒的なシステムを、今すぐあなたの口座に。</h2>
+        <p>本ページでご紹介した最上位システム『MIDAS』のタイアップ提供のご案内に加え、<br>
+        <span style="color: #d4af37; font-weight: bold;">トレンド特化型EAや、環境認識を極めるオリジナルインジケータなど、<br>
+        一般には公開していない「VALHALLA 限定ツール」の数々</span>も公式LINE登録者様限定で公開しております。<br><br>
+        各システムのロジック解説や、稼働のための環境構築サポートはLINEにて個別に行っております。<br>
+        もう、粗悪なEAで資金を失うのは終わりにしましょう。</p>
+        
+        <a href="https://lin.ee/lOi6rtH" target="_blank" class="btn-line">
+            📲 公式LINEを登録して非公開ツールを見る
+        </a>
+    </div>
+
+    <footer>
+        <div>
+            <a href="index.html">トップページ</a>
+            <a href="law.html">特定商取引法に基づく表記</a>
+            <a href="disclaimer.html">免責事項</a>
+            <a href="terms.html">利用規約</a>
+            <a href="privacy.html">プライバシーポリシー</a>
+        </div>
+        <p>&copy; 2026 VALHALLA All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.fade-in');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>

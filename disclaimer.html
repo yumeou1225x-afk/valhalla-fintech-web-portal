@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免責事項 | VALHALLA</title>
+    <style>
+        /* ====================================
+           基本設定・ヘッダー・フッター（トップページと同じ）
+           ==================================== */
+        body { background-color: #121212; color: #ffffff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; }
+        header { background-color: #000000; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; }
+        .logo { font-size: 28px; font-weight: bold; color: #d4af37; letter-spacing: 3px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav li { margin-left: 30px; }
+        nav a { color: #ffffff; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: #d4af37; }
+        footer { background-color: #000000; padding: 40px 20px; text-align: center; border-top: 1px solid #333333; margin-top: 80px;}
+        footer a { color: #888888; text-decoration: none; margin: 0 15px; font-size: 14px; transition: 0.3s; display: inline-block; margin-bottom: 10px;}
+        footer a:hover { color: #d4af37; }
+        footer p { color: #555555; font-size: 12px; margin-top: 20px; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px 20px; }
+            nav ul { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            nav li { margin: 5px 10px; }
+        }
+
+        /* ====================================
+           このページ専用の設定（免責事項の文章デザイン）
+           ==================================== */
+        .page-header {
+            text-align: center;
+            padding: 80px 20px 40px 20px;
+        }
+        .page-header h1 {
+            color: #d4af37;
+            font-size: 32px;
+            letter-spacing: 2px;
+        }
+        
+        /* 文章を入れる箱の設定 */
+        .legal-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #1e1e1e;
+            padding: 50px;
+            border-radius: 8px;
+            border-top: 3px solid #d4af37;
+            box-sizing: border-box; /* スマホではみ出さない魔法 */
+        }
+
+        /* リード文（最初の説明） */
+        .lead-text {
+            color: #dddddd;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-size: 15px;
+        }
+
+        /* 各項目の見出しと文章 */
+        .legal-section {
+            margin-bottom: 30px;
+        }
+        .legal-section h3 {
+            color: #d4af37;
+            font-size: 18px;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .legal-section p {
+            color: #cccccc;
+            line-height: 1.8;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* 最後の締めくくりの文章 */
+        .closing-text {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #444444;
+            color: #aaaaaa;
+            font-weight: bold;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* スマホ用の余白調整 */
+        @media (max-width: 768px) {
+            .legal-container { padding: 30px 20px; width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALHALLA</div>
+        <nav>
+            <ul>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#results">Results</a></li>
+                <li><a href="index.html#flow">Flow</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>免責事項</h1>
+        <p style="color: #aaaaaa;">（投資に関するリスクおよび注意事項）</p>
+    </div>
+
+    <div class="legal-container">
+        
+        <p class="lead-text">
+            当グループ（VALHALLA）が提供するソフトウェア（EA、インジケータ等）および各種コンテンツは、システムトレードの学習・研究や環境構築のサポートを目的としたものであり、将来の利益を保証するものではありません。<br><br>
+            外国為替証拠金取引（FX）をはじめとする金融商品の取引には、為替変動、金利変動、各国の経済・社会情勢等の変化による高いリスクが伴います。証拠金以上の大きな損失を被る可能性もゼロではありません。<br>
+            したがって、当グループの提供するツールや情報をご利用いただく際は、以下の点に同意いただいたものとみなします。
+        </p>
+
+        <div class="legal-section">
+            <h3>1. 自己責任の原則</h3>
+            <p>ツールの設定、稼働、停止、および実際の取引における最終的な判断は、すべてお客様ご自身の責任において行っていただきますようお願いいたします。</p>
+        </div>
+
+        <div class="legal-section">
+            <h3>2. 利益の無保証と過去データ</h3>
+            <p>当グループで公開しているバックテストやフォワードテストの結果は過去のデータに基づくものであり、将来の相場における同様のパフォーマンスや利益を約束・保証するものではありません。</p>
+        </div>
+
+        <div class="legal-section">
+            <h3>3. 投資助言業務の非該当</h3>
+            <p>当グループは「金融商品取引法」における投資助言・代理業には該当しません。お客様に対する個別の投資に関する助言、資金運用の指示、具体的な売買シグナルの配信等は一切行っておりません。</p>
+        </div>
+
+        <div class="legal-section">
+            <h3>4. 損害賠償の免責</h3>
+            <p>万が一、当グループが提供するソフトウェア、情報、またはリンク先の外部サイト等の利用によって、お客様に直接的・間接的な損害（投資元本の損失、機会損失、精神的苦痛等を含む）が生じた場合であっても、当グループは一切の責任を負いかねます。</p>
+        </div>
+
+        <p class="closing-text">
+            投資を行う際は、ご自身の資金状況、投資経験、リスク許容度を十分に考慮の上、余剰資金の範囲内で運用されることを強く推奨いたします。
+        </p>
+
+    </div>
+
+    <footer>
+        <div>
+            <a href="index.html">トップページへ戻る</a>
+            <a href="law.html">特定商取引法に基づく表記</a>
+            <a href="disclaimer.html" style="color: #d4af37;">免責事項</a>
+        </div>
+        <p>&copy; 2026 VALHALLA All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

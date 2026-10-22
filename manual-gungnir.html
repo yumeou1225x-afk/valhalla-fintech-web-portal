@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUNGNIR 完全解説＆導入マニュアル | VALLHALA</title>
+    <style>
+        /* 基本設定 */
+        body { background-color: #080b12; color: #e2e8f0; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
+        header { background-color: #04060a; padding: 20px 50px; display: flex; justify-content: center; align-items: center; border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 1000;}
+        .logo { font-size: 28px; font-weight: bold; color: #FFD700; letter-spacing: 3px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        /* タイトルエリア */
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .product-badge { background-color: rgba(0, 255, 255, 0.1); color: #00FFFF; border: 1px solid #00FFFF; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 15px; display: inline-block; letter-spacing: 2px; }
+        .page-header h1 { font-size: 34px; margin-bottom: 20px; letter-spacing: 2px; color: #ffffff; line-height: 1.4;}
+        .page-header p { color: #94a3b8; font-size: 16px; margin: 0 auto; max-width: 750px; text-align: left; }
+
+        /* 目次 (TOC) */
+        .toc { background-color: #111827; border: 1px solid #1e293b; border-left: 4px solid #00FFFF; padding: 25px; border-radius: 8px; margin-bottom: 50px; }
+        .toc h3 { color: #ffffff; margin-top: 0; margin-bottom: 15px; font-size: 18px; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 10px; }
+        .toc a { color: #94a3b8; text-decoration: none; transition: 0.2s; display: block; padding: 5px 0;}
+        .toc a:hover { color: #00FFFF; padding-left: 5px;}
+
+        /* 各章デザイン */
+        .chapter { background-color: #111827; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0, 255, 255, 0.03); }
+        .chapter-title { color: #00FFFF; font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #1e293b; display: flex; align-items: center; gap: 15px;}
+        .chapter-title span { background-color: #00FFFF; color: #000; padding: 2px 12px; border-radius: 4px; font-size: 16px; font-weight: bold;}
+
+        /* 見出し・テキスト */
+        h3 { color: #ffffff; font-size: 20px; margin-top: 40px; margin-bottom: 20px; border-left: 4px solid #FFD700; padding-left: 15px; }
+        h4 { color: #00FFFF; font-size: 18px; margin-top: 30px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+        p { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; }
+        ul { padding-left: 20px; margin-bottom: 25px; color: #cbd5e1; }
+        li { margin-bottom: 10px; }
+        strong { color: #ffffff; font-weight: bold; background: linear-gradient(transparent 70%, rgba(255, 215, 0, 0.3) 0%); }
+
+        /* テーブル（パラメーター） */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: #0f172a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3);}
+        th, td { padding: 15px; border: 1px solid #1e293b; text-align: left; font-size: 14px; }
+        th { background-color: #1e293b; color: #FFD700; font-weight: bold; width: 35%; }
+        td { color: #cbd5e1; }
+
+        /* ステップボックス */
+        .step-box { background-color: #0f172a; border-left: 4px solid #00FFFF; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px; border-top: 1px solid #1e293b; border-right: 1px solid #1e293b; border-bottom: 1px solid #1e293b;}
+        .step-title { color: #00FFFF; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 15px; }
+        .step-box p:last-child { margin-bottom: 0; }
+        .step-box ol { padding-left: 20px; color: #cbd5e1; margin-bottom: 0;}
+        .step-box ol li { margin-bottom: 10px; }
+
+        /* 警告・重要ボックス */
+        .alert-box { background-color: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 25px; margin: 30px 0; }
+        .alert-title { color: #FFD700; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;}
+        .alert-box p { color: #fef08a; margin: 0; }
+
+        @media (max-width: 768px) {
+            .chapter { padding: 25px 15px; }
+            .page-header h1 { font-size: 26px; }
+            th, td { padding: 10px; font-size: 13px; display: block; width: 100%; box-sizing: border-box; }
+            th { border-bottom: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">VALLHALA</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <span class="product-badge">NEXT-GEN SIGNAL PLATFORM</span>
+            <h1>🗡️ GUNGNIR (グングニル)<br>完全解説 ＆ 導入マニュアル</h1>
+            <p>本システムは、単なるサインツールではなく、プロトレーダーの「環境認識」「資金管理」「メンタル管理」をすべてコードに落とし込んだ、次世代のトレードプラットフォーム（EA）です。本マニュアルを熟読し、GUNGNIRの圧倒的な優位性をあなたのトレードに取り入れてください。</p>
+        </div>
+
+        <div class="toc">
+            <h3>📑 目次</h3>
+            <ul>
+                <li><a href="#ch1">▶ 第1章：ロジックと搭載機能（特徴と強み）</a></li>
+                <li><a href="#ch2">▶ 第2章：導入・稼働マニュアル（チャートへの適用）</a></li>
+                <li><a href="#ch3">▶ 第3章：パラメーター完全解説</a></li>
+                <li><a href="#ch4">▶ 第4章：推奨運用ルールと注意点</a></li>
+            </ul>
+        </div>
+
+        <div id="ch1" class="chapter">
+            <h2 class="chapter-title"><span>第1章</span> ロジックと搭載機能（特徴と強み）</h2>
+            <p>GUNGNIRは、ボリンジャーバンドのブレイクアウトをベースにしながらも、数々の「ダマシ回避フィルター」を搭載することで、高精度のスナイパートレードを実現します。</p>
+            
+            <h3>1. 【環境認識】MTF（マルチタイムフレーム）フィルター</h3>
+            <p>現在の時間足の形だけでエントリーすることはありません。裏側で「4時間足」と「日足」の長期トレンド（200MA）を監視し、大局のトレンドとサインの方向が一致した時のみエントリーを許可します。これにより、無謀な逆張りを防ぎます。</p>
+
+            <h3>2. 【勢いの証明】RSIモメンタム・フィルター</h3>
+            <p>一般的なRSIの「買われすぎ・売られすぎ」という逆張り手法は使いません。GUNGNIRでは、RSIの「50」を基準とし、<strong>「今、本当に買い（または売り）の勢いが強いのか？」</strong>を判定するモメンタムフィルターとして採用しています。価格が動いていても、内部のエネルギーが伴っていないダマシのブレイクアウトを極限までフィルタリングします。</p>
+
+            <h3>3. 【最適化された利確/損切】通貨別・完全非公開チューニング</h3>
+            <p>GUNGNIRは「USDJPY」「GBPJPY」「GOLD」の3銘柄専用に設計されています。<br>勝率計算や資金管理の要となる「利確（TP）」と「損切（SL）」のpips幅は、過去の膨大なデータから各通貨ペアに最も適した数値を算出し、<strong>システム内部に固定</strong>しています。ユーザーが設定に迷うことはなく、常に最適化されたロジックで稼働します。</p>
+
+            <h3>4. 【自由の獲得】Discordチャート画像・自動送信システム</h3>
+            <p>PCの前に張り付く必要はありません。サインが確定した瞬間、システムが自動でMT4のチャート画像を撮影し、あなたのスマホ（Discord）へ直接送信します。あなたはスマホに届いた画像を見て、最終的なエントリー判断を下すだけです。</p>
+        </div>
+
+        <div id="ch2" class="chapter">
+            <h2 class="chapter-title"><span>第2章</span> 導入・稼働マニュアル</h2>
+            
+            <div style="background-color: #0f172a; border: 1px solid #00FFFF; border-left: 5px solid #00FFFF; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+                <h4 style="color: #00FFFF; margin-top: 0; margin-bottom: 15px; font-size: 18px; border: none; padding: 0;">⚠️ 必ずお読みください：共通の初期設定について</h4>
+                <p style="color: #cbd5e1; margin-bottom: 20px;">初めて稼働させる方は、システムをチャートに入れる前に<strong>「VPSの準備」「MT4の通信許可（DLL・Webリクエスト）」「Discord Webhookの取得」「ファイルの配置」</strong>を行う必要があります。<br>
+                まだ設定が完了していない方は、必ず以下の共通マニュアルを先に完了させてください。</p>
+                <a href="manual-setup.html" target="_blank" style="display: inline-block; background-color: #00FFFF; color: #000; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 50px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);">
+                    ➡ 【全システム共通】導入・初期設定マニュアルを見る
+                </a>
+            </div>
+
+            <div class="step-box">
+                <h3 class="step-title">STEP 1：チャートへの適用と設定</h3>
+                <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">※共通の初期設定が完了していることを前提とした手順です。</p>
+                <ol>
+                    <li>対象となる通貨ペア（USDJPY, GBPJPY, GOLDのいずれか）のチャートを開き、時間足（M5推奨）を設定します。</li>
+                    <li>ナビゲーターから、対象通貨ペアに合った GUNGNIR EA をチャートにドラッグ＆ドロップします。</li>
+                    <li>設定画面の「全般」タブで<strong>「自動売買を許可する」「DLLの使用を許可する」</strong>にチェックを入れます。</li>
+                    <li>「パラメーターの入力」タブを開き、「読み込み」ボタンからPresetsフォルダに入れた「推奨セットファイル（.set）」を読み込みます。</li>
+                    <li><strong>【重要】</strong>同じく「パラメーターの入力」タブにある <code>InpWebhookUrl</code> の項目に、ご自身で取得したDiscordのWebhook URLを貼り付け、「OK」を押します。</li>
+                </ol>
+            </div>
+
+            <div class="step-box" style="border-left-color: #FFD700; margin-bottom: 0;">
+                <h3 class="step-title" style="color: #FFD700;">STEP 2： 稼働確認</h3>
+                <ol>
+                    <li><strong>認証完了の確認：</strong> チャート左上のダッシュボードに 【VALLHALA】【稼働中】 と表示され、過去の矢印と勝率が表示されれば認証成功です。</li>
+                    <li><strong>通知テストの確認：</strong> スマホのDiscordに「🔔 GUNGNIR 接続テスト成功」というメッセージとチャート画像が届いていれば、通信設定は完璧です。</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="ch3" class="chapter">
+            <h2 class="chapter-title"><span>第3章</span> パラメータ完全解説</h2>
+            <p>GUNGNIRは、あなたのトレードスタイルに合わせてカスタマイズが可能です。<br><span style="color: #00FFFF; font-size: 14px;">(※基本的には同梱の推奨セットファイルでの運用を推奨します)</span></p>
+
+            <h4>■ 【基本ロジック設定】</h4>
+            <table>
+                <tr><th>計算期間 (20)</th><td>ボリンジャーバンドやRSIの計算に使うローソク足の本数です。</td></tr>
+                <tr><th>ボリンジャーバンド偏差 (2.0)</th><td>バンドの広がりを設定します。2.0は統計的に約95%の確率で価格が収まる基準値です。</td></tr>
+                <tr><th>トレンド判定MA期間 (200)</th><td>相場の長期トレンドを判断するための移動平均線（SMA）の期間です。</td></tr>
+                <tr><th>RSI判定しきい値 (50)</th><td>相場の勢い（モメンタム）を判定する境界線です。50のままでご使用ください。</td></tr>
+                <tr><th>サイン後の停止足数 (10)</th><td>サイン点灯後、指定した本数が経過するまで次のサインを出さない「連続エントリー防止」機能です。</td></tr>
+            </table>
+
+            <h4>■ 【上位足フィルター】</h4>
+            <table>
+                <tr><th>上位足フィルターを使う (true)</th><td>4時間足・日足のトレンド方向と一致した時のみサインを出します。</td></tr>
+                <tr><th>上位足MA期間 (20)</th><td>上位足のトレンド判定に使うMAの期間です。</td></tr>
+            </table>
+
+            <h4>■ 【ATR利益追求設定】</h4>
+            <table>
+                <tr><th>ボラティリティ追従モード(ATR) (false)</th><td>trueにすると、相場の値動きが激しい時に、内部の利確幅を自動で広げて勝率判定を行います。</td></tr>
+                <tr><th>ATR利確倍率 (2.0)</th><td>ATRモードON時の利確幅の倍率です。</td></tr>
+            </table>
+
+            <h4>■ 【回避・防御フィルター】</h4>
+            <table>
+                <tr><th>スプレッド制限を使う (true) / 許容値 (3.0)</th><td>設定値(pips)以上にスプレッドが広がっている時はサインを出しません。</td></tr>
+                <tr><th>時間制限を使う (true) / 開始・終了時間</th><td>指定した時間帯（MT4サーバー時間）のみ稼働させます。</td></tr>
+                <tr><th>経済指標フィルター (true) / 発表時間 / 停止時間</th><td>重要な指標発表時間を設定し、その前後は一切の動作を停止してリスクを回避します。</td></tr>
+            </table>
+
+            <h4>■ 【資金管理】</h4>
+            <table>
+                <tr><th>推奨ロットを表示する (true)</th><td>口座資金と損切幅から、適正なロット数を自動計算して画面に表示します。</td></tr>
+                <tr><th>許容リスク(％) (2.0)</th><td>1回のトレードで許容する損失を「口座資金の何％にするか」を設定します（例:2.0%）。表示されたロットでエントリーすれば、負けても資金の2%の損失で済みます。</td></tr>
+            </table>
+
+            <div class="alert-box">
+                <h4 class="alert-title">★重要 【Discord連携(統合版)】</h4>
+                <table style="margin-top: 15px; margin-bottom: 0; box-shadow: none;">
+                    <tr><th style="background-color: transparent;">Discordへ直接通知する (true)</th><td>スマホへ画像付き通知を送るためのメインスイッチです。</td></tr>
+                    <tr><th style="background-color: transparent;">InpWebhookUrl (空欄)</th><td><strong style="color: #FFD700; background: none;">【必須入力】</strong> ご自身のDiscordサーバーのWebhook URLをここに貼り付けてください。（※これを入力しないと通知が届きません）</td></tr>
+                    <tr><th style="background-color: transparent;">適用時にテスト通知を送る (true)</th><td>EAをセットした際、通信テストとして1度だけDiscordへ通知を送ります。</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="ch4" class="chapter">
+            <h2 class="chapter-title"><span>第4章</span> 推奨運用ルールと注意点</h2>
+            <ul>
+                <li><strong>通知が来たらチャートを確認：</strong> GUNGNIRは自動でエントリーしません。Discordに画像付きの通知が届いたら、ご自身の目で相場状況を確認し、優位性が高いと判断したポイントでのみ手動でエントリーを行ってください。</li>
+                <li><strong>資金管理の徹底：</strong> ダッシュボードに表示される「推奨ロット」は、パラメーターで設定した許容リスク（％）に基づいています。無謀なロットでのトレードは避け、常に一定のリスクで運用することを推奨します。</li>
+            </ul>
+
+            <div class="alert-box" style="margin-top: 40px; background-color: #111827; border-color: #1e293b;">
+                <h4 class="alert-title" style="color: #94a3b8;">【免責事項および注意事項】</h4>
+                <p style="color: #64748b; font-size: 13px;">当システムは過去のデータに基づき検証されたロジックを搭載しておりますが、FX取引には元本割れや証拠金以上の損失を被るリスクが伴います。最終的なエントリーの判断、ロット数の設定等は、自己責任において行ってください。お客様の環境不具合等に伴ういかなる損失についても、開発元および配布元は一切の責任を負いかねます。</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 VALLHALA All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
